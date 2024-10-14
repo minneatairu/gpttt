@@ -1,0 +1,15 @@
+/* Load custom font using @font-face */
+@font-face {
+  font-family: "DuFont";
+  src: url("bold.ttf") format("truetype");
+  /* Corrected 'ttf' format to 'truetype' */
+}
+
+/* Second Font Face (Regular) */
+@font-face {
+  font-family: "DuFontRegular";
+  src: url("reg.ttf") format("truetype");
+  /* Added the second font */
+}
+
+

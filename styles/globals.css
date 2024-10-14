@@ -1,0 +1,1883 @@
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@media print {
+  /* Hide elements that shouldn't appear in the print */
+  .print-button,
+  div.button-section,
+  form.text-prompt-form,
+  .video-container,
+  .close-print-button,
+  .title-wrapper,
+  .title-section,
+  .chat-title,
+  .button-container,
+  .gpt-input-form,
+  .psycho a {
+    display: none !important;
+  }
+
+  .gpt-container,
+  div.modal-overlay {
+    margin: AUTO !important;
+  }
+
+  .grid-section {
+    padding: 0 !important;
+  }
+
+  .overlay-text {
+    font-size: 0.8rem !important;
+    padding: 10px !important;
+  }
+
+  /* /* Replace with a static title for print */
+  .print-title {
+    display: block !important;
+    font-family: "DuFont", serif;
+    font-size: 9vw;
+    line-height: 1;
+    border: 2px solid;
+    margin: 10px 10px 0 0;
+    display: inline-block;
+    margin-block-start: 0;
+    border-bottom: none;
+    margin-block-end: 0;
+    width: calc(100% - 0px);
+    box-sizing: border-box;
+    padding-top: 15px;
+    text-align: center;
+  }
+
+  .grid-section {
+    border-top: 2px solid black !important;
+  }
+
+  a,
+  link {
+    color: black !important;
+    text-decoration: none;
+  }
+
+  .title-section,
+  .grid-section {
+    display: block;
+  }
+}
+
+div.gallery-item {
+  padding-bottom: 4px;
+  width: 100%;
+}
+.heading-text {
+  margin-top: 6rem;
+}
+/* Grid container */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  /* 8 columns */
+  justify-items: center;
+  padding: 0 10px;
+}
+
+p {
+  margin-block-end: 0;
+  font-size: 20px;
+  font-family: "t26-carbon", monospace;
+  text-align: justify;
+}
+
+.image-info {
+  font-family: t26-carbon, monospace;
+}
+
+h2,
+.gallery-title {
+  font-family: "DuFont", serif;
+}
+li {
+  padding-top: 1rem;
+  text-align: justify;
+}
+ol {
+  font-family: t26-carbon, monospace;
+  font-size: 20px;
+}
+.loading-img {
+  color: #fff;
+}
+div.imagesss {
+  background: black;
+  height: 100%;
+  padding: 8% 10%;
+}
+
+.close-print-button {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  padding: 5px 5px 3px 5px;
+  background-color: YELLOW;
+  color: BLACK;
+  border: 2px SOLID;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Styling for the "X" close text */
+.close-text {
+  font-size: 1rem;
+  color: black;
+  cursor: pointer;
+  display: block;
+  background: lime;
+  border-radius: 50%;
+  padding: 5px;
+  border: 2px solid;
+  line-height: 1;
+  padding-top: 7px;
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+
+.video-container {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out; /* Smooth fade */
+}
+
+.video-container.hidden {
+  opacity: 0; /* Hide with fade */
+  pointer-events: none; /* Disable interaction when hidden */
+}
+
+div.modal-column.border {
+  border-left: 2px solid;
+}
+div.dragfile {
+  color: yellow;
+}
+/* Custom checkbox */
+input[type="checkbox"] {
+  /* Hide the default checkbox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: white;
+  min-width: 50px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: black;
+}
+
+div.modal-content.modal-bottom-right {
+  background: black;
+  padding: 8% 10%;
+  z-index: 999;
+  width: 100%;
+  border: 2px solid;
+}
+
+input[type="checkbox"]:checked:after {
+  content: "X";
+  color: lime;
+  display: inline-block;
+  text-align: center;
+  font-size: 50px;
+  margin-top: -8px;
+  font-family: t26-carbon, monospace;
+  width: 50px;
+  margin-left: -3px;
+  max-width: 50px;
+}
+
+.button-border {
+  border-left: 2px solid;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "DuFont", serif;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.chattext {
+  font-size: 1.3rem;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-family: t26-carbon, monospace;
+  line-height: 1;
+}
+/* 
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+} */
+
+.video-container {
+  position: relative;
+  margin: 0 5px;
+  box-sizing: border-box;
+}
+
+.video-controls button {
+  color: black;
+  font-family: "DuFont", serif;
+  padding-top: 7px;
+  text-transform: uppercase;
+  border: 2px solid;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+button {
+  font-family: "DuFont", serif;
+}
+
+/* button {
+  font-size: 2rem;
+} */
+
+h2 {
+  font-size: 2rem;
+  line-height: 0.8;
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.material-symbols-outlined {
+  font-size: 3rem !important;
+  font-weight: 900;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+}
+
+div.braidtag {
+  background: lime;
+}
+
+.button-section {
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  font-family: "DuFont", serif;
+  background: none;
+  text-transform: uppercase;
+  line-height: 1;
+  z-index: 50;
+  border: 2px solid;
+  text-align: center;
+  margin: 0 10px;
+  border-bottom: none;
+  display: flex;
+  /* Use flexbox to distribute space between buttons */
+  justify-content: space-between;
+  /* Evenly space the buttons */
+  align-items: center;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: black;
+}
+
+input#name.datasub,
+input#email.datasub,
+input#image-link.datasub {
+  background: lime;
+  font-family: "Kode Mono", serif;
+  text-align: center;
+}
+
+.button-section button {
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  font-family: "DuFont", serif;
+  background: none;
+  text-transform: uppercase;
+  line-height: 1;
+  padding-top: 10px;
+  width: 100%;
+}
+
+div.modal-overlay {
+  border-bottom: none;
+  margin: 0 10px;
+}
+
+input {
+  font-family: "DuFont", serif;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+
+  background: white;
+  border: 2px solid;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Show modal with smooth animation */
+.modal.show {
+  display: flex;
+  /* Change from none to flex */
+  opacity: 1;
+}
+
+.callbraid {
+  font-size: 3rem;
+  margin: 0 10px;
+  border-bottom: none;
+  animation: scroll-left 30s linear infinite;
+
+  border: 2px solid;
+  padding: 0 10px;
+}
+
+/* Responsive styling: single column on mobile */
+@media (max-width: 768px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+}
+
+/* Close button (X) */
+span.close-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: "DuFont", serif;
+}
+
+.parastyle {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  text-align: justify;
+  font-family: t26-carbon, monospace;
+}
+
+.modal-column {
+  padding: 6rem;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.gennbtt {
+  padding: 0 2rem;
+}
+
+button.submit-button {
+  width: 100%;
+}
+
+/* Align the form inputs in a row */
+.text-prompt-form {
+  display: flex;
+
+  margin: 0 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+button.genebtt {
+  padding-top: 8px;
+  line-height: 1;
+}
+
+textarea.genetext {
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  font-family: "DuFont", serif;
+  padding-top: 10px;
+  width: 100%;
+  text-align: justify;
+  display: flex;
+  text-align: center;
+}
+
+.text-prompt-form input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 3rem;
+  border: none;
+  font-family: "DuFont", serif;
+  color: black;
+  cursor: pointer;
+  background: lime;
+}
+
+/* Spinning Animation for Overlay Text */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+span.material-symbols-outlined {
+  font-weight: 900;
+  cursor: pointer;
+}
+
+VIDEO {
+  margin-bottom: -5px;
+}
+
+#muteButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Two-column grid layout */
+.modal-grid,
+.dataa-modal-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  border: 2px solid;
+  border-bottom: none;
+}
+
+.overlay-text {
+  position: absolute;
+  line-height: 1;
+  bottom: 20px;
+  right: 20px;
+  font-family: "DuFont", serif;
+  border-radius: 50%;
+  color: black;
+  padding: 30px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border: 2px solid;
+  background: lime;
+  transition: transform 0.5s ease;
+  z-index: 90;
+}
+
+.print-button {
+  position: fixed;
+  top: 30px;
+  right: 10px;
+  padding: 30px 20px;
+  background-color: yellow;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  z-index: 1000;
+  border: 2px solid;
+}
+
+/* The spinning will be triggered when hovering over the image-container */
+.image-container:hover .overlay-text {
+  animation: spin 5s linear infinite;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.grid-section {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 4px;
+  padding: 0 10px;
+}
+
+.video-container {
+  transition: opacity 0.5s ease;
+}
+
+.grid-section img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+/* Media query for tablets */
+@media (max-width: 768px) {
+  .modal-grid {
+    grid-template-columns: 1fr !important;
+    border-top: none;
+  }
+  VIDEO {
+    height: 100vh;
+    object-fit: cover;
+  }
+  sup {
+    font-size: 10px !important;
+  }
+  p {
+    font-size: 16px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .button-border {
+    border-left: none;
+  }
+  span.material-symbols-outlined,
+  .animated-text {
+    font-size: 1.5rem !important;
+  }
+  .button-section {
+    display: block;
+  }
+  .title-section {
+    padding-bottom: 12.5vw;
+  }
+  div.modal-column.border {
+    border-left: none;
+  }
+  .title {
+    font-size: 20vw !important;
+  }
+  .video-overlay-text h2,
+  .video-overlay-text-four h2,
+  .video-overlay-text-three h2,
+  .video-overlay-text-two h2 {
+    font-size: 1.5rem !important;
+  }
+  .button-section button {
+    font-size: 1.5rem;
+    border-bottom: 2px solid;
+  }
+  .modal-column {
+    padding: 20px !important;
+  }
+  .gpt-container {
+    margin: 0;
+  }
+
+  div.modal-content.modal-bottom-right {
+    padding: 20px;
+  }
+}
+
+/* Media query for mobile */
+@media (max-width: 480px) {
+  .grid-section,
+  .modal-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .modal-column {
+    padding: 20px !important;
+  }
+}
+
+.title-section {
+  border: 2px solid;
+  margin: 10px 10px 0 10px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.title-wrapper {
+  height: 8vw;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.title {
+  font-family: "DuFont", serif;
+  font-size: 9vw;
+  line-height: 1.1;
+  animation: scroll 90s linear infinite;
+  display: inline-block;
+}
+
+/* Infinite scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.file-upload {
+  display: none;
+  /* Hide the default file input */
+}
+
+.upload-button {
+  width: 20vw;
+  height: 20vw;
+  border-radius: 50%;
+  font-family: t26-carbon, monospace;
+  background: lime;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid;
+}
+
+label {
+  font-family: t26-carbon, monospace;
+  font-size: 1rem;
+}
+
+.braid-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.datasub {
+  width: 100%;
+  padding: 20px 0;
+
+  border: 2px solid black;
+  background-color: lime;
+  font-family: t26-carbon, monospace;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.or-text {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.upload-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: lime;
+  color: black;
+  font-family: t26-carbon, monospace;
+  text-align: center;
+  border: 2px solid black;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.upload-label:hover {
+  background-color: darkgreen;
+}
+
+.file-upload {
+  display: none;
+}
+
+.braid-type-title {
+  margin: 20px 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.braid-type-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  gap: 2px;
+  background: black;
+  border: 2px solid;
+}
+
+.braidtag {
+  display: flex;
+  align-items: center;
+  /* Align checkbox and label vertically */
+  justify-content: space-between;
+  padding-right: 18px;
+  background-color: lime;
+  font-family: t26-carbon, monospace;
+}
+
+.braidtag input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+form.braid-form {
+  margin-top: 20px;
+}
+
+input.datasub.url {
+  border-top: none;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+}
+
+input.datasub.email {
+  border-top: none;
+  border-bottom: none;
+}
+
+.submit-button {
+  margin-top: 30px;
+  padding: 20px 40px;
+  font-family: "DuFont", serif;
+  font-size: 2rem;
+  background-color: lime;
+  color: black;
+  border: 2px solid black;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button.right-zoom {
+  border-left: 2px solid;
+}
+
+/* Responsive behavior for smaller screens */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columns for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns for mobile */
+  }
+}
+
+/* Help button with ? */
+.help-button {
+  border-left: 2px solid;
+
+  background-color: lime;
+
+  cursor: pointer;
+}
+
+.zoom-controls {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 18px;
+  border: 2px SOLID;
+  display: flex;
+  z-index: 99999;
+}
+
+.gallery-item {
+  position: relative;
+}
+
+.zoom-controls button {
+  font-family: Kode Mono;
+  background-color: lime;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.image-index {
+  top: 0;
+  position: absolute;
+  right: 0;
+  font-family: Kode Mono;
+  padding: 5px;
+  color: black;
+  font-size: smaller;
+  background: lime;
+
+  z-index: 9999;
+  line-height: 1;
+}
+
+.zoom-controls button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+/* Filter dropdown styling */
+.filter-controls {
+  display: flex;
+  z-index: 99999;
+  align-items: center;
+}
+
+.filter-controls select {
+  z-index: 99999;
+  padding: 9px;
+  font-size: 1rem;
+  background: lime;
+  font-family: Kode Mono;
+  border: 2px solid #000;
+  cursor: pointer;
+  position: absolute;
+}
+
+.modal-data {
+  padding: 6rem;
+  border: 2px solid;
+  margin: 0 10px;
+}
+
+/* Custom dropdown toggle button */
+.dropdown-toggle {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px SOLID;
+  background-color: LIME;
+  bottom: 10px;
+  right: 120px;
+  color: BLACK;
+  padding-top: 12px;
+  cursor: pointer;
+  z-index: 99999;
+  font-family: Kode Mono;
+  position: fixed;
+}
+
+.data-link {
+  width: fit-content;
+  /* Set width to fit the content */
+  margin: 0 auto;
+  /* Center the div horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background-color: lime;
+  color: black;
+  font-family: t26-carbon, monospace;
+  text-align: center;
+  border: 2px solid black;
+  cursor: pointer;
+  font-size: 1rem;
+  animation: pulse 4.5s infinite;
+  /* Apply animation with 1.5s duration, repeating infinitely */
+}
+
+.checkbox-section {
+  margin-top: 2rem;
+}
+
+/* Center the div using Flexbox */
+/* Pulsing Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    /* Normal size */
+    opacity: 1;
+    /* Fully visible */
+  }
+
+  50% {
+    transform: scale(1.06);
+    /* Slightly larger */
+    opacity: 0.8;
+    /* Slightly transparent */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Back to normal size */
+    opacity: 1;
+    /* Fully visible */
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+}
+
+.link-style {
+  color: black;
+  text-decoration: none;
+  /* Remove underline */
+  display: block;
+  padding: 20px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  position: fixed;
+  background-color: LIME;
+  list-style: none;
+  padding: 8px;
+  margin: 0;
+  bottom: 56px;
+  min-width: 80px;
+  right: 120px;
+  border: 2px SOLID BLACK;
+  font-family: Kode Mono;
+  overflow-y: auto;
+  z-index: 10000;
+  border-bottom: none;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.video-container {
+  position: relative;
+}
+
+.video-overlay-text {
+  position: absolute;
+  left: 20px;
+  /* Position from the left */
+  top: 10%;
+
+  cursor: pointer;
+  box-shadow: 0 0 20px 3px LIME;
+  color: LIME;
+  padding: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  text-align: center;
+  transform: rotate(-20deg);
+  animation: pulse-shadow-lime 2s infinite ease-in-out;
+  /* Apply the pulsing animation */
+
+  backdrop-filter: blur(10px);
+}
+
+.video-overlay-text-two {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  cursor: pointer;
+  transform: rotate(10deg);
+  color: YELLOW;
+  border-radius: 50%;
+  animation: pulse-shadow-yellow 5s infinite ease-in-out;
+  /* Apply the pulsing animation */
+
+  padding: 3rem;
+
+  /* Apply gradient shadow */
+  box-shadow: 0 0 20px 3px YELLOW;
+
+  backdrop-filter: blur(10px);
+}
+.title-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Optional: Add a semi-transparent background */
+  backdrop-filter: blur(10px); /* Applies the blur effect */
+  z-index: 1; /* Ensure it is above the text */
+}
+.title-wrapper {
+  position: relative;
+  z-index: 2; /* Keeps the text visible over the blur */
+}
+
+.video-overlay-text-three {
+  position: absolute;
+  top: 30%;
+  right: 30px;
+  cursor: pointer;
+  color: #0099ff;
+  border-radius: 50%;
+  padding: 3rem;
+  animation: pulse-shadow- #0099ff 4s infinite ease-in-out;
+  /* Apply the pulsing animation */
+
+  /* Apply gradient shadow */
+  box-shadow: 0 0 20px 3px #0099ff;
+  backdrop-filter: blur(10px);
+}
+
+.video-overlay-text-four {
+  position: absolute;
+  top: 60%;
+  cursor: pointer;
+  left: 45%;
+
+  color: red;
+  border-radius: 50%;
+  padding: 3rem;
+
+  /* Apply gradient shadow */
+  box-shadow: 0 0 20px 3px RED;
+  backdrop-filter: blur(10px);
+  animation: pulse-shadow 3s infinite ease-in-out;
+  /* Apply the pulsing animation */
+}
+
+@keyframes pulse-shadow {
+  0% {
+    box-shadow: 0 0 20px 3px red;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 10px red;
+  }
+
+  100% {
+    box-shadow: 0 0 20px 3px red;
+  }
+}
+
+@keyframes pulse-shadow-lime {
+  0% {
+    box-shadow: 0 0 20px 3px lime;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 10px lime;
+  }
+
+  100% {
+    box-shadow: 0 0 20px 3px lime;
+  }
+}
+
+@keyframes pulse-shadow-blue {
+  0% {
+    box-shadow: 0 0 20px 3px #0099ff;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 10px #0099ff;
+  }
+
+  100% {
+    box-shadow: 0 0 20px 3px #0099ff;
+  }
+}
+
+@keyframes pulse-shadow-yellow {
+  0% {
+    box-shadow: 0 0 20px 3px yellow;
+  }
+
+  50% {
+    box-shadow: 0 0 40px 10px yellow;
+  }
+
+  100% {
+    box-shadow: 0 0 20px 3px yellow;
+  }
+}
+
+.video-overlay-text h2,
+.video-overlay-text-two h2,
+.video-overlay-text-three h2,
+.video-overlay-text-four h2 {
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.text-prompt-form {
+  height: 3rem;
+  /* Default height */
+  transition: height 1s ease;
+  /* Smooth transition */
+}
+
+.text-prompt-form.expanded {
+  height: 100vh;
+
+  padding: 8% 0;
+}
+
+.genetext:focus,
+.chat-textarea:focus {
+  outline: none;
+  /* Ensure outline is removed */
+}
+
+.chat-textarea {
+  font-size: 3rem;
+  font-family: "DuFont";
+}
+
+.modal-overlay {
+  opacity: 1;
+  transition: opacity 0.9s ease, visibility 0.3s ease;
+}
+
+.chat-button {
+  margin-top: 3rem;
+
+  align-self: center;
+  /* Ensures the button is centered */
+}
+
+.chat-input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* This will center all children (textarea and button) */
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9999999;
+  transition: opacity 0.4s ease;
+}
+
+.modal-content {
+  overflow: scroll;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+/* Expand the modal with max-height */
+.modal-content.expand {
+  opacity: 1;
+}
+
+.grid-section .image-container:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.grid-section .image-container:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.grid-section .image-container:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Add more if necessary */
+/* Add this to your CSS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Slight upwards movement */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    /* Original position */
+  }
+}
+sup {
+  font-size: x-small;
+  background: lime;
+}
+.grid-section .image-container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.print-button,
+div.gallery-item,
+.dropdown-menu {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animated-textarea-container {
+  position: relative;
+  width: 100%;
+}
+
+.animated-text-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  vertical-align: middle;
+}
+
+.genetext {
+  width: 100%;
+
+  resize: none;
+
+  font-size: 1.2rem;
+  opacity: 1;
+}
+
+.gpt-input::placeholder {
+  color: white;
+}
+
+.animated-text {
+  padding: 0 6rem;
+  font-size: 3rem;
+  pointer-events: none;
+  opacity: 1;
+  font-family: "DuFont", serif;
+}
+
+.attachment-icon {
+  position: absolute;
+  right: 10px;
+  /* Position it to the right inside the input */
+  cursor: pointer;
+}
+
+.animated-text span {
+  opacity: 0;
+  display: inline-block;
+  animation: fadeInWords 0.6s ease-in-out forwards;
+  line-height: 1;
+}
+
+.animated-placeholder {
+  font-size: 2rem;
+  padding-top: 10px;
+  line-height: 1;
+  opacity: 1;
+
+  font-family: "DuFont", serif;
+}
+
+.animated-placeholder span {
+  display: inline-block;
+  opacity: 0;
+  animation: fadePInWords 8s ease-in-out infinite;
+}
+
+/* Animation for smooth fade-in and fade-out */
+@keyframes fadePInWords {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInWords {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    /* Optional: subtle upward motion */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* styles in globals.css */
+@keyframes fadeInWord {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-word {
+  opacity: 0;
+  /* Initially invisible */
+  animation: fadeInWord 0.6s ease-in-out forwards;
+  /* Apply fade-in effect */
+  display: inline-block;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+  font-family: "DuFont", serif;
+  font-size: 3rem;
+  padding-top: 10px;
+  line-height: 1;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.psycho {
+  position: absolute;
+  left: 0 !important;
+  padding: 0 5px;
+  bottom: 0;
+  color: white;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px;
+  margin: 20px 0;
+  word-wrap: break-word;
+  animation: messagefadeIn 0.8s forwards;
+  /* Smooth fade-in effect */
+}
+
+@keyframes messagefadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.ai {
+  background-color: #0099ff;
+  align-self: flex-start;
+  font-family: "DuFont";
+  font-size: 3rem;
+}
+
+button.info {
+  position: absolute;
+  top: 10px;
+  background-color: lime !important;
+  color: black;
+  padding: 5px 25px;
+  padding-top: 10px;
+  border-radius: 50%;
+  border: 2px solid;
+  left: 10px;
+  z-index: 99999;
+}
+
+.psycho a {
+  color: white !important;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: t26-carbon, monospace;
+}
+
+.message.user {
+  font-family: "DuFont";
+  font-size: 3rem;
+  background-color: lime;
+  color: black;
+  align-self: flex-end;
+  line-height: 1;
+  padding-top: 18px;
+}
+
+.chat-textarea {
+  width: 100%;
+  margin-bottom: 3rem;
+  height: 300px;
+
+  border: 2px solid;
+  color: #fff;
+  background: black;
+}
+
+.chat-button {
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 3rem;
+  border: 2px solid;
+
+  font-size: 3rem;
+}
+
+.chat-response {
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 16px;
+  border: 2px solid;
+}
+
+/* Styles when the form is expanded */
+.genebtt.expanded {
+  color: white;
+  margin-top: 3rem;
+  padding: 3rem;
+  border-radius: 50%;
+  /* Rounder button */
+  border: 2px solid;
+  font-size: 3rem;
+}
+
+.genebtt {
+  margin: 0 2rem;
+}
+
+/* Modal Overlay */
+.dataa-modal-overlay {
+  top: 0;
+  left: 0;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  opacity: 0;
+  /* Start invisible */
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  /* Smooth transition */
+}
+
+/* Modal Content */
+.dataa-modal-content {
+  background: white;
+  transition: opacity 0.4s ease;
+  /* Simple fade transition */
+  opacity: 0;
+  font-family: "DuFont", serif;
+  border: 2px solid;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button */
+.dataa-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* When the modal is shown */
+.dataa-modal-overlay.show {
+  opacity: 1;
+  /* Make the overlay visible */
+  visibility: visible;
+  /* Ensure the overlay is visible */
+}
+
+.dataa-modal-content.show {
+  opacity: 1;
+  /* Make the modal content visible */
+}
+
+.gpt-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 20px;
+  margin: 0 15%;
+  background-color: #000;
+}
+
+.gpt-drag-overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.gpt-drag-subtext {
+  font-size: 0.875rem;
+  color: #718096;
+  /* Gray */
+}
+
+.gpt-message-container {
+  display: flex;
+
+  width: 100%;
+
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gpt-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.gpt-message {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.gpt-first-message {
+  padding-top: 20px;
+}
+
+.gpt-icon-container {
+  width: 100%;
+
+  color: #fff;
+}
+
+.gpt-message-content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.gpt-attachments {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.gpt-image {
+  width: 30% !important;
+
+  border: 2px solid #fff;
+  width: 10rem;
+  margin-bottom: 12px;
+}
+
+.gpt-text-preview {
+  font-size: 0.75rem;
+  width: 10rem;
+  height: 6rem;
+  overflow: hidden;
+  color: #fff;
+  border: 2px solid;
+  /* Light gray */
+  padding: 8px;
+  background-color: #ffff;
+}
+
+.gpt-input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* Ensures button is centered relative to the form */
+  margin-top: 16px;
+  /* Adds some space above the button */
+}
+
+.gpt-input {
+  background-color: #000;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  font-family: t26-carbon, monospace;
+  min-height: 150px;
+
+  text-align: CENTER;
+  border: 2px SOLID;
+}
+
+.gpt-file-preview {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  padding: 3rem 0;
+
+  padding: 20px 0;
+
+  width: 100%;
+}
+
+.gpt-file-image {
+  width: 40%;
+  border: 2px solid white;
+}
+
+.uploadtips {
+  margin-top: 3rem;
+  color: white;
+  font-size: 20px;
+  font-family: t26-carbon, monospace;
+}
+
+.gpt-file-text-preview {
+  font-size: 0.5rem;
+  width: 7rem;
+  height: 4rem;
+  overflow: hidden;
+  color: #fff;
+  border: 2px solid;
+  padding: 8px;
+  background-color: #000;
+}
+
+.fade-word {
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form visibility classes */
+.chat-input-form {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.5s ease;
+}
+
+.chat-input-form.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.chat-input-form.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.fade-word {
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form visibility classes */
+.chat-input-form {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.5s ease;
+}
+
+.chat-input-form.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.chat-input-form.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gpt-message-content {
+  max-width: 60%;
+}
+
+.gpt-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Space between messages */
+}
+
+.gpt-message.user .gpt-name {
+  padding-right: 5px;
+  text-align: right;
+  font-size: 20px;
+  font-family: t26-carbon, monospace;
+}
+
+.gpt-message.assistant .gpt-name {
+  padding-left: 5px;
+  text-align: left;
+  font-size: 20px;
+  font-family: t26-carbon, monospace;
+}
+
+.gpt-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gpt-message.user {
+  align-items: flex-end;
+  /* Align user messages to the right */
+}
+
+.gpt-message.assistant .gpt-message-content {
+  color: #fff;
+}
+
+.gpt.-text {
+  font-size: 2rem;
+}
+
+.gpt-message.user .gpt-message-content {
+  background-color: #0099ff;
+  /* User message background color */
+  border: 2px solid;
+  color: #fff;
+}
+
+div.gpt-name {
+  color: #fff;
+}
+
+/* Styling for bot/assistant messages */
+.bot-message {
+  background-color: #006633;
+  padding: 20px;
+  margin-block-start: 0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-block-start: 0;
+  color: #fff;
+  border: 2px solid;
+}
+
+/* Styling for user messages */
+.user-message {
+  margin-block-start: 0;
+  background-color: #0099ff;
+  /* Different background for user messages */
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+form.w-full.flex.font-mono {
+  padding: 10px;
+}
