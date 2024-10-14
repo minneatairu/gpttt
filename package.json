@@ -10,6 +10,7 @@
     "speed-up-video": "ffmpeg -i cherries-oranges-bananas.mov -filter:v 'setpts=PTS/3' cherries-oranges-bananas.mp4"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.66",
     "@nanostores/react": "github:ai/react",
     "ai": "^3.4.9",
     "buffer-to-data-url": "^1.0.0",
