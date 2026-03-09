@@ -30,7 +30,7 @@ const Modal = ({ onClose, children, className, position }) => {
   // Conditionally apply inline styles for the black background
   const isBlackBackground = className === "modal-bottom-right";
   const overlayStyle = {
-    backgroundColor: isBlackBackground ? "black" : "white",
+    backgroundColor: isBlackBackground ? "black" : "rgba(0, 0, 0, 0.45)",
     ...(isBlackBackground && {
       display: "flex", // Ensure flexbox is applied
       justifyContent: "center", // Horizontally center the content
