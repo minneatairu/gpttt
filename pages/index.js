@@ -10,6 +10,8 @@ export default function Home() {
     let particles;
     let streakLight1;
     let streakLight2;
+    let streakMesh1;
+    let streakMesh2;
     let word1;
     let word2;
     let introProgress = 0;
@@ -17,6 +19,7 @@ export default function Home() {
     let modalTransitionInterval;
     let animationFrame;
     let isDisposed = false;
+    let isModalOpen = false;
 
     const loadingEl = document.getElementById("loading");
     const container = document.getElementById("canvas-container");
@@ -29,6 +32,7 @@ export default function Home() {
 
     function togglePlayState() {
       const isShowing = modal.classList.contains("active");
+      isModalOpen = !isShowing;
 
       if (modalTransitionInterval) {
         clearInterval(modalTransitionInterval);
@@ -248,24 +252,23 @@ export default function Home() {
         const streakTex = createStreakTexture();
 
         streakLight1 = new THREE.PointLight(0x00ffff, 4, 300);
-        streakLight1.add(
-          new THREE.Mesh(
-            streakGeo,
-            new THREE.MeshBasicMaterial({
-              map: streakTex,
-              color: 0x00ffff,
-              transparent: true,
-              opacity: 0.9,
-              blending: THREE.AdditiveBlending,
-              depthWrite: false,
-              side: THREE.DoubleSide,
-            })
-          )
+        streakMesh1 = new THREE.Mesh(
+          streakGeo,
+          new THREE.MeshBasicMaterial({
+            map: streakTex,
+            color: 0x00ffff,
+            transparent: true,
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+          })
         );
+        streakLight1.add(streakMesh1);
         group.add(streakLight1);
 
         streakLight2 = new THREE.PointLight(0x0055ff, 4, 300);
-        const streakMesh2 = new THREE.Mesh(
+        streakMesh2 = new THREE.Mesh(
           streakGeo,
           new THREE.MeshBasicMaterial({
             map: streakTex,
@@ -382,11 +385,15 @@ export default function Home() {
           }
         }
 
-        if (streakLight1 && streakLight2) {
-          streakLight1.intensity = 4 * introProgress;
-          streakLight2.intensity = 4 * introProgress;
+        if (streakLight1 && streakLight2 && streakMesh1 && streakMesh2) {
+          const streaksVisible = !isModalOpen;
+          streakMesh1.visible = streaksVisible;
+          streakMesh2.visible = streaksVisible;
 
-          if (introProgress > 0) {
+          streakLight1.intensity = streaksVisible ? 4 * introProgress : 0;
+          streakLight2.intensity = streaksVisible ? 4 * introProgress : 0;
+
+          if (streaksVisible && introProgress > 0) {
             const time = Date.now() * 0.0012;
             streakLight1.position.set(Math.sin(time) * 380, 15, 35);
             streakLight2.position.set(Math.sin(time * 0.7 + Math.PI) * 380, -10, 40);
@@ -452,10 +459,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap");
-      `}</style>
-
       <main className="home-page">
         <div id="loading">Loading 3D Engine...</div>
 
@@ -479,178 +482,6 @@ export default function Home() {
 
         <div id="canvas-container" />
       </main>
-
-      <style jsx>{`
-        .home-page {
-          margin: 0;
-          overflow: hidden;
-          background-color: #000511;
-          align-items: center;
-          height: 100vh;
-          color: white;
-          position: relative;
-        }
-
-        #canvas-container {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-        }
-
-        #loading {
-          position: absolute;
-          z-index: 2;
-          font-size: 1.2rem;
-          letter-spacing: 2px;
-          color: #00ffff;
-          text-transform: uppercase;
-          animation: pulse 1.5s infinite;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-
-        @keyframes pulse {
-          0% {
-            opacity: 0.5;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0.5;
-          }
-        }
-
-        .y2k-btn-container {
-          position: absolute;
-          bottom: 40px;
-          right: 50px;
-          z-index: 40;
-          display: flex;
-        }
-
-        .y2k-btn {
-          position: relative;
-          background: radial-gradient(circle at 50% 10%, rgba(0, 255, 255, 0.3), rgba(0, 34, 102, 0.8));
-          border: 1px solid rgba(0, 255, 255, 0.6);
-          border-radius: 50%;
-          width: 55px;
-          height: 55px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: #0ff;
-          font-family: "MuseoModerno", sans-serif;
-          font-weight: 700;
-          font-size: 18px;
-          letter-spacing: 0;
-          cursor: pointer;
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4),
-            inset 0 -5px 15px rgba(0, 255, 255, 0.2);
-          transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-          text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-          outline: none;
-        }
-
-        .y2k-btn::before {
-          content: "";
-          position: absolute;
-          top: 2px;
-          left: 10%;
-          width: 80%;
-          height: 40%;
-          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-          border-radius: 50%;
-          pointer-events: none;
-        }
-
-        .y2k-btn:hover {
-          transform: scale(1.05);
-          color: #fff;
-          border-color: #0ff;
-          box-shadow: 0 0 15px rgba(0, 255, 255, 0.4),
-            inset 0 2px 6px rgba(255, 255, 255, 0.6),
-            inset 0 -5px 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .y2k-btn:active {
-          transform: scale(0.95);
-          box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.5),
-            inset 0 -2px 10px rgba(0, 255, 255, 0.2);
-        }
-
-        .info-modal {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          z-index: 30;
-          display: none;
-          justify-content: center;
-          align-items: center;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .info-modal.active {
-          display: flex;
-          opacity: 1;
-        }
-
-        .info-modal.active .modal-content {
-          transform: translateY(0) scale(1);
-        }
-
-        .modal-content {
-          background: transparent;
-          border: none;
-          padding: 40px;
-          max-width: 1200px;
-          width: 90%;
-          color: #b3cce6;
-          font-family: "MuseoModerno", sans-serif;
-          font-weight: 300;
-          text-align: center;
-          box-shadow: none;
-          position: relative;
-          transform: translateY(20px) scale(0.95);
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .route-intro {
-          font-size: clamp(32px, 5vw, 65px);
-          color: #e0f7fa;
-          line-height: 1.3;
-          letter-spacing: 1px;
-          text-shadow: 0 5px 15px rgba(0, 0, 0, 0.9),
-            0 0 20px rgba(0, 255, 255, 0.5);
-        }
-
-        .credits-text {
-          position: absolute;
-          bottom: 10px;
-          left: 0;
-          width: 100%;
-          text-align: center;
-          color: #00ffff;
-          font-size: 12px;
-          font-weight: 300;
-          letter-spacing: 2px;
-          opacity: 0.8;
-          pointer-events: none;
-          font-family: "MuseoModerno", sans-serif;
-          z-index: 20;
-        }
-
-      `}</style>
     </>
   );
 }
