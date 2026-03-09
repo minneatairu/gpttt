@@ -475,6 +475,8 @@ export default function Home() {
           <div className="credits-text">Conceptualized by Minne Atairu</div>
         </div>
 
+        <div className="credits-text">Conceptualized by Minne Atairu</div>
+
         <div id="canvas-container" />
       </main>
 
@@ -639,13 +641,15 @@ export default function Home() {
           width: 100%;
           text-align: center;
           color: #00ffff;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 300;
           letter-spacing: 2px;
           opacity: 0.8;
           pointer-events: none;
           font-family: "MuseoModerno", sans-serif;
+          z-index: 20;
         }
+
       `}</style>
     </>
   );
