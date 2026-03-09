@@ -144,6 +144,12 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+
+.info-modal .modal-body,
+.info-modal .route-intro {
+  font-family: "MuseoModerno", sans-serif;
+}
+
 .route-intro {
   font-size: clamp(32px, 5vw, 65px);
   color: #e0f7fa;
