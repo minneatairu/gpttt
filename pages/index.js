@@ -449,6 +449,7 @@ export default function Home() {
     <>
       <Head>
         <title>Okada Air - Futuristic Transit</title>
+        <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <style jsx global>{`
@@ -472,10 +473,9 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="credits-text">Conceptualized by Minne Atairu</div>
         </div>
 
-        <div className="credits-text">Conceptualized by Minne Atairu</div>
+        <div className="credits-text">Conceptualized by Minn Atairu</div>
 
         <div id="canvas-container" />
       </main>
@@ -529,7 +529,7 @@ export default function Home() {
           position: absolute;
           bottom: 40px;
           right: 50px;
-          z-index: 20;
+          z-index: 40;
           display: flex;
         }
 
@@ -636,7 +636,7 @@ export default function Home() {
 
         .credits-text {
           position: absolute;
-          bottom: 40px;
+          bottom: 10px;
           left: 0;
           width: 100%;
           text-align: center;
