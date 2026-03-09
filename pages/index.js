@@ -26,7 +26,7 @@ export default function Home() {
     const modal = document.getElementById("infoModal");
     const playPauseBtn = document.getElementById("playPauseBtn");
 
-    if (!container || !loadingEl || !modal || !playPauseBtn) {
+    if (!container || !loadingEl || !modal) {
       return undefined;
     }
 
@@ -63,7 +63,7 @@ export default function Home() {
       }
     }
 
-    playPauseBtn.addEventListener("click", togglePlayState);
+    playPauseBtn?.addEventListener("click", togglePlayState);
 
     const bootstrap = async () => {
       const THREE = await import("three");
@@ -437,7 +437,7 @@ export default function Home() {
       if (modalTransitionInterval) {
         clearInterval(modalTransitionInterval);
       }
-      playPauseBtn.removeEventListener("click", togglePlayState);
+      playPauseBtn?.removeEventListener("click", togglePlayState);
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
@@ -462,11 +462,13 @@ export default function Home() {
       <main className="home-page">
         <div id="loading">Loading 3D Engine...</div>
 
+        {/*
         <div className="y2k-btn-container">
           <button id="playPauseBtn" className="y2k-btn" type="button">
             ▶
           </button>
         </div>
+        */}
 
         <div className="info-modal" id="infoModal">
           <div className="modal-content">
