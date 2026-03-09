@@ -455,7 +455,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Okada Air - Futuristic Transit</title>
+        <title>Okada Air</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
@@ -478,7 +478,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="credits-text">Conceptualized by Minn Atairu</div>
+        <div className="credits-text">Conceptualized by Minne Atairu</div>
 
         <div id="canvas-container" />
       </main>
