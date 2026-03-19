@@ -14,6 +14,7 @@ export default function Home() {
     let streakMesh2;
     let word1;
     let word2;
+    let chromeEnvTarget;
     let introProgress = 0;
     let targetProgress = 1;
     let modalTransitionInterval;
@@ -127,6 +128,57 @@ export default function Home() {
         renderer.setSize(window.innerWidth, window.innerHeight);
       }
 
+      function buildChromeEnvironment() {
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        pmremGenerator.compileEquirectangularShader();
+
+        const envScene = new THREE.Scene();
+        envScene.background = new THREE.Color(0x02040a);
+
+        const skyGeo = new THREE.SphereGeometry(250, 32, 32);
+        const skyMat = new THREE.MeshBasicMaterial({
+          color: 0x07111f,
+          side: THREE.BackSide,
+        });
+        const sky = new THREE.Mesh(skyGeo, skyMat);
+        envScene.add(sky);
+
+        const glowColors = [0x00d9ff, 0x0055ff, 0xffffff];
+        glowColors.forEach((color, index) => {
+          const glow = new THREE.Mesh(
+            new THREE.SphereGeometry(index === 2 ? 22 : 14, 24, 24),
+            new THREE.MeshBasicMaterial({ color })
+          );
+          glow.position.set(index === 0 ? -60 : index === 1 ? 70 : 0, index === 2 ? 60 : -10, -40 + index * 40);
+          envScene.add(glow);
+        });
+
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(90, 8, 16, 64),
+          new THREE.MeshBasicMaterial({ color: 0x66ccff })
+        );
+        ring.rotation.x = Math.PI / 2.8;
+        ring.position.z = -60;
+        envScene.add(ring);
+
+        const envRenderTarget = pmremGenerator.fromScene(envScene, 0.04);
+        const environmentMap = envRenderTarget.texture;
+
+        sky.geometry.dispose();
+        sky.material.dispose();
+        ring.geometry.dispose();
+        ring.material.dispose();
+        envScene.children
+          .filter((child) => child !== sky && child !== ring)
+          .forEach((child) => {
+            child.geometry?.dispose?.();
+            child.material?.dispose?.();
+          });
+        pmremGenerator.dispose();
+
+        return { environmentMap, envRenderTarget };
+      }
+
       function build3DText(font) {
         loadingEl.style.display = "none";
 
@@ -142,13 +194,18 @@ export default function Home() {
           bevelSegments: 5,
         };
 
+        const { environmentMap, envRenderTarget } = buildChromeEnvironment();
+        chromeEnvTarget = envRenderTarget;
+        scene.environment = environmentMap;
+
         const material = new THREE.MeshPhysicalMaterial({
           color: 0xffffff,
-          metalness: 0.85,
-          roughness: 0.15,
+          metalness: 1,
+          roughness: 0.08,
+          envMapIntensity: 2.2,
           clearcoat: 1,
-          clearcoatRoughness: 0.1,
-          emissive: 0x111122,
+          clearcoatRoughness: 0.05,
+          emissive: 0x06080f,
         });
 
         const lineMat = new THREE.LineBasicMaterial({
@@ -213,19 +270,19 @@ export default function Home() {
 
         scene.add(new THREE.HemisphereLight(0x00ffff, 0x002266, 0.8));
 
-        const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.8);
         dirLight.position.set(50, 100, 150);
         scene.add(dirLight);
 
-        const cyanLight = new THREE.PointLight(0x00ffff, 3, 600);
+        const cyanLight = new THREE.PointLight(0x00ffff, 1.6, 600);
         cyanLight.position.set(-100, 50, 80);
         scene.add(cyanLight);
 
-        const coolBlueLight = new THREE.PointLight(0x0055ff, 3, 600);
+        const coolBlueLight = new THREE.PointLight(0x0055ff, 1.4, 600);
         coolBlueLight.position.set(100, -50, 80);
         scene.add(coolBlueLight);
 
-        const blueLight = new THREE.PointLight(0x0088ff, 2, 600);
+        const blueLight = new THREE.PointLight(0x0088ff, 1.1, 600);
         blueLight.position.set(0, 0, 150);
         scene.add(blueLight);
 
@@ -448,6 +505,10 @@ export default function Home() {
       if (renderer?.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      if (scene) {
+        scene.environment = null;
+      }
+      chromeEnvTarget?.dispose?.();
       renderer?.dispose();
     };
   }, []);
