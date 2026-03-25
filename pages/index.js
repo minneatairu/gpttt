@@ -14,6 +14,7 @@ export default function Home() {
     let streakMesh2;
     let word1;
     let word2;
+    let chromeEnvTarget;
     let introProgress = 0;
     let targetProgress = 1;
     let modalTransitionInterval;
@@ -127,6 +128,75 @@ export default function Home() {
         renderer.setSize(window.innerWidth, window.innerHeight);
       }
 
+      function buildChromeEnvironment() {
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        pmremGenerator.compileEquirectangularShader();
+
+        const envScene = new THREE.Scene();
+        envScene.background = new THREE.Color(0xe7ebf0);
+
+        const skyGeo = new THREE.SphereGeometry(260, 32, 32);
+        const skyMat = new THREE.MeshBasicMaterial({
+          color: 0xf4f7fb,
+          side: THREE.BackSide,
+        });
+        const sky = new THREE.Mesh(skyGeo, skyMat);
+        envScene.add(sky);
+
+        const reflectiveCards = [
+          { position: [0, 85, -30], rotation: [-Math.PI / 2.6, 0, 0], color: 0xffffff, size: [220, 120] },
+          { position: [0, -95, -10], rotation: [Math.PI / 2.25, 0, 0], color: 0xcfd6df, size: [240, 150] },
+          { position: [-110, 10, -20], rotation: [0, Math.PI / 2.8, 0], color: 0xe9eef5, size: [120, 160] },
+          { position: [110, 15, 0], rotation: [0, -Math.PI / 2.8, 0], color: 0xdbe3ee, size: [120, 160] },
+        ];
+
+        const cardMeshes = reflectiveCards.map(({ position, rotation, color, size }) => {
+          const card = new THREE.Mesh(
+            new THREE.PlaneGeometry(size[0], size[1]),
+            new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide })
+          );
+          card.position.set(...position);
+          card.rotation.set(...rotation);
+          envScene.add(card);
+          return card;
+        });
+
+        const accentRing = new THREE.Mesh(
+          new THREE.TorusGeometry(92, 6, 16, 72),
+          new THREE.MeshBasicMaterial({ color: 0xbfc9d8 })
+        );
+        accentRing.rotation.x = Math.PI / 2.5;
+        accentRing.position.set(0, -10, -55);
+        envScene.add(accentRing);
+
+        const accents = [
+          { color: 0xd8f6ff, position: [-55, 25, 35], radius: 16 },
+          { color: 0xa8d7ff, position: [65, -5, 55], radius: 18 },
+          { color: 0xffffff, position: [0, 55, 70], radius: 24 },
+        ];
+
+        const accentMeshes = accents.map(({ color, position, radius }) => {
+          const accent = new THREE.Mesh(
+            new THREE.SphereGeometry(radius, 24, 24),
+            new THREE.MeshBasicMaterial({ color })
+          );
+          accent.position.set(...position);
+          envScene.add(accent);
+          return accent;
+        });
+
+        const envRenderTarget = pmremGenerator.fromScene(envScene, 0.04);
+        const environmentMap = envRenderTarget.texture;
+
+        [sky, accentRing, ...cardMeshes, ...accentMeshes].forEach((mesh) => {
+          mesh.geometry.dispose();
+          mesh.material.dispose();
+        });
+        pmremGenerator.dispose();
+
+        return { environmentMap, envRenderTarget };
+      }
+
       function build3DText(font) {
         loadingEl.style.display = "none";
 
@@ -142,13 +212,18 @@ export default function Home() {
           bevelSegments: 5,
         };
 
+        const { environmentMap, envRenderTarget } = buildChromeEnvironment();
+        chromeEnvTarget = envRenderTarget;
+        scene.environment = environmentMap;
+
         const material = new THREE.MeshPhysicalMaterial({
-          color: 0xffffff,
-          metalness: 0.85,
-          roughness: 0.15,
+          color: 0xe8edf5,
+          metalness: 1,
+          roughness: 0.06,
+          envMapIntensity: 2.8,
           clearcoat: 1,
-          clearcoatRoughness: 0.1,
-          emissive: 0x111122,
+          clearcoatRoughness: 0.04,
+          emissive: 0x000000,
         });
 
         const lineMat = new THREE.LineBasicMaterial({
@@ -213,19 +288,19 @@ export default function Home() {
 
         scene.add(new THREE.HemisphereLight(0x00ffff, 0x002266, 0.8));
 
-        const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.8);
         dirLight.position.set(50, 100, 150);
         scene.add(dirLight);
 
-        const cyanLight = new THREE.PointLight(0x00ffff, 3, 600);
+        const cyanLight = new THREE.PointLight(0x00ffff, 1.6, 600);
         cyanLight.position.set(-100, 50, 80);
         scene.add(cyanLight);
 
-        const coolBlueLight = new THREE.PointLight(0x0055ff, 3, 600);
+        const coolBlueLight = new THREE.PointLight(0x0055ff, 1.4, 600);
         coolBlueLight.position.set(100, -50, 80);
         scene.add(coolBlueLight);
 
-        const blueLight = new THREE.PointLight(0x0088ff, 2, 600);
+        const blueLight = new THREE.PointLight(0x0088ff, 1.1, 600);
         blueLight.position.set(0, 0, 150);
         scene.add(blueLight);
 
@@ -448,6 +523,10 @@ export default function Home() {
       if (renderer?.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      if (scene) {
+        scene.environment = null;
+      }
+      chromeEnvTarget?.dispose?.();
       renderer?.dispose();
     };
   }, []);
