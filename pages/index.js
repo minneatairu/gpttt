@@ -5,7 +5,31 @@ const INFO_SLIDES = ["/okada.jpg", "/okada2.jpeg"];
 
 export default function Home() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [isInfoModalMounted, setIsInfoModalMounted] = useState(false);
   const [activeInfoSlide, setActiveInfoSlide] = useState(0);
+
+  const openInfoModal = () => {
+    setIsInfoModalMounted(true);
+    setIsInfoModalOpen(true);
+  };
+
+  const closeInfoModal = () => {
+    setIsInfoModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isInfoModalOpen) {
+      return undefined;
+    }
+
+    const teardownTimer = window.setTimeout(() => {
+      setIsInfoModalMounted(false);
+    }, 320);
+
+    return () => {
+      window.clearTimeout(teardownTimer);
+    };
+  }, [isInfoModalOpen]);
 
   useEffect(() => {
     if (!isInfoModalOpen) {
@@ -439,29 +463,32 @@ export default function Home() {
           type="button"
           className="info-button"
           aria-label="Open info image"
-          onClick={() => setIsInfoModalOpen(true)}
+          onClick={openInfoModal}
         >
           i
         </button>
 
-        {isInfoModalOpen ? (
+        {isInfoModalMounted ? (
           <div
-            className="info-modal-overlay"
+            className={`info-modal-overlay ${isInfoModalOpen ? "is-open" : "is-closing"}`}
             role="button"
             tabIndex={0}
-            onClick={() => setIsInfoModalOpen(false)}
+            onClick={closeInfoModal}
             onKeyDown={(event) => {
               if (event.key === "Escape" || event.key === "Enter" || event.key === " ") {
-                setIsInfoModalOpen(false);
+                closeInfoModal();
               }
             }}
           >
-            <div className="info-modal-content" onClick={(event) => event.stopPropagation()}>
+            <div
+              className={`info-modal-content ${isInfoModalOpen ? "is-open" : "is-closing"}`}
+              onClick={(event) => event.stopPropagation()}
+            >
               <button
                 type="button"
                 className="info-modal-close"
                 aria-label="Close image modal"
-                onClick={() => setIsInfoModalOpen(false)}
+                onClick={closeInfoModal}
               >
                 x
               </button>
