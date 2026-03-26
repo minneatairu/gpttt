@@ -109,8 +109,8 @@
   overflow: hidden;
   background: rgba(0, 0, 0, 0.65);
   opacity: 0;
-  transform: translateY(12px) scale(0.985);
-  transition: opacity 320ms ease, transform 320ms ease;
+  transform: translateY(42px) scale(0.99);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .info-modal-content.is-open {
@@ -208,14 +208,28 @@
   margin: 14px 0 0;
   color: #71717a;
   font-style: italic;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
-  padding-left: 12px;
+  border-left: none;
+  padding-left: 0;
 }
 
 .terminology-card-quote span {
   color: #e4e4e7;
   font-style: normal;
   font-weight: 500;
+}
+
+.terminology-card-usage-label {
+  margin: 20px 0 4px;
+  color: #e4e4e7;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+
+.terminology-card-usage-note {
+  color: #a1a1aa;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 
 .terminology-card-origin {
@@ -285,6 +299,16 @@
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
+  animation: modal-close-spin 10s linear infinite;
+}
+
+@keyframes modal-close-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
