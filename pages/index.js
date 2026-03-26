@@ -495,7 +495,7 @@ export default function Home() {
           aria-label="Open info image"
           onClick={openInfoModal}
         >
-          i
+          ?
         </button>
 
         {isInfoModalMounted ? (
