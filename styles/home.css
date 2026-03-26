@@ -11,6 +11,27 @@
   font-family: "MuseoModerno", sans-serif;
 }
 
+.home-page,
+.home-page * {
+  font-family: "MuseoModerno", sans-serif;
+}
+
+.project-credit {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  color: #fafafa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.project-credit:hover {
+  text-decoration: underline;
+}
+
 #canvas-container {
   width: 100%;
   height: 100%;
@@ -196,7 +217,6 @@
 
 .terminology-card-origin {
   margin-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: 18px;
 }
 
@@ -222,7 +242,6 @@
 
 .terminology-card-origin span {
   color: #d4d4d8;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .info-modal-media {
