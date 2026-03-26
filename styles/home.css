@@ -94,10 +94,118 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00ffff;
-  font-size: clamp(1.2rem, 2.4vw, 2rem);
-  letter-spacing: 0.12em;
+  padding: clamp(20px, 4vw, 48px);
+}
+
+.terminology-card {
+  width: min(100%, 560px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.9);
+  color: #d4d4d8;
+  padding: clamp(20px, 3vw, 38px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  font-family: Inter, sans-serif;
+}
+
+.terminology-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.terminology-card-header h2 {
+  margin: 0;
+  color: #fafafa;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.terminology-card-header span {
+  color: #a1a1aa;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.terminology-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.terminology-card-tags span {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(24, 24, 27, 0.85);
+  color: #a1a1aa;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.terminology-card-plural {
+  margin: 0 0 20px;
+  color: #71717a;
+  font-size: 0.9rem;
+}
+
+.terminology-card-plural strong {
+  color: #e4e4e7;
+  font-weight: 600;
+}
+
+.terminology-card-definition {
+  margin: 0;
+  color: #d4d4d8;
+  line-height: 1.7;
+  font-size: 0.97rem;
+}
+
+.terminology-card-quote {
+  margin: 14px 0 0;
+  color: #71717a;
+  font-style: italic;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  padding-left: 12px;
+}
+
+.terminology-card-quote span {
+  color: #e4e4e7;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.terminology-card-origin {
+  margin-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 18px;
+}
+
+.terminology-card-origin h3 {
+  margin: 0 0 10px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: #71717a;
+}
+
+.terminology-card-origin p {
+  margin: 0;
+  color: #a1a1aa;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.terminology-card-origin strong {
+  color: #e4e4e7;
+}
+
+.terminology-card-origin span {
+  color: #d4d4d8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .info-modal-media {
