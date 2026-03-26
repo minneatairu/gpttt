@@ -463,7 +463,7 @@ export default function Home() {
                 aria-label="Close image modal"
                 onClick={() => setIsInfoModalOpen(false)}
               >
-                ×
+                x
               </button>
 
               <div className="info-modal-layout">
