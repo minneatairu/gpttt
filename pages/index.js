@@ -1,8 +1,27 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
+const INFO_SLIDES = ["/okada.jpg", "/okada2.jpeg"];
+
 export default function Home() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [activeInfoSlide, setActiveInfoSlide] = useState(0);
+
+  useEffect(() => {
+    if (!isInfoModalOpen) {
+      setActiveInfoSlide(0);
+      return undefined;
+    }
+
+    const slideshowInterval = window.setInterval(() => {
+      setActiveInfoSlide((currentSlide) => (currentSlide + 1) % INFO_SLIDES.length);
+    }, 3500);
+
+    return () => {
+      window.clearInterval(slideshowInterval);
+    };
+  }, [isInfoModalOpen]);
+
   useEffect(() => {
     let scene;
     let camera;
@@ -453,7 +472,14 @@ export default function Home() {
                 </section>
 
                 <section className="info-modal-media">
-                  <img src="/okada.jpg" alt="Okada" className="info-modal-image" />
+                  {INFO_SLIDES.map((slideSrc, slideIndex) => (
+                    <img
+                      key={slideSrc}
+                      src={slideSrc}
+                      alt="Okada"
+                      className={`info-modal-image ${slideIndex === activeInfoSlide ? "is-visible" : ""}`}
+                    />
+                  ))}
                 </section>
               </div>
             </div>
