@@ -537,7 +537,7 @@ export default function Home() {
                     </div>
 
                     <p className="terminology-card-plural">
-                      Plural: <strong>Okadas</strong> or <strong>Okada</strong>
+                      Plural: <strong>Okada</strong>
                     </p>
 
                     <p className="terminology-card-definition">
@@ -546,8 +546,10 @@ export default function Home() {
                       cars.
                     </p>
 
+                    <p className="terminology-card-usage-label">USAGE</p>
+
                     <blockquote className="terminology-card-quote">
-                      "I dey on top <span>Okada</span>."
+                      "I dey on top <span>Okada</span>." <span className="terminology-card-usage-note">(I&apos;m riding a motorcycle)</span>
                     </blockquote>
 
                     <section className="terminology-card-origin">
