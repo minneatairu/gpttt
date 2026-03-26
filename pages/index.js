@@ -468,7 +468,42 @@ export default function Home() {
 
               <div className="info-modal-layout">
                 <section className="info-modal-copy">
-                  <p>Okada Air</p>
+                  <article className="terminology-card" aria-label="Okada terminology info">
+                    <header className="terminology-card-header">
+                      <h2>Okada</h2>
+                      <span>[oh-kah-dah]</span>
+                    </header>
+
+                    <div className="terminology-card-tags">
+                      <span>noun</span>
+                      <span>Nigerian English</span>
+                    </div>
+
+                    <p className="terminology-card-plural">
+                      Plural: <strong>Okadas</strong> or <strong>Okada</strong>
+                    </p>
+
+                    <p className="terminology-card-definition">
+                      A commercial motorcycle taxi used to transport passengers, particularly favored for
+                      its ability to navigate through heavy urban traffic and reach areas inaccessible to
+                      cars.
+                    </p>
+
+                    <blockquote className="terminology-card-quote">
+                      "I dey on top <span>Okada</span>."
+                    </blockquote>
+
+                    <section className="terminology-card-origin">
+                      <h3>Word Origin</h3>
+                      <p>
+                        <strong>Late 20th century:</strong> Named after <span>Okada Air</span>, a
+                        now-defunct Nigerian domestic airline founded in the 1980s. Because these
+                        motorcycle taxis could bypass Lagos traffic jams and get passengers to their
+                        destinations with airplane-like speed, locals began humorously comparing them to
+                        the airline.
+                      </p>
+                    </section>
+                  </article>
                 </section>
 
                 <section className="info-modal-media">
