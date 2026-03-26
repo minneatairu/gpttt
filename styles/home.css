@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(16px, 3vw, 32px);
+  padding: 0;
   opacity: 0;
   transition: opacity 320ms ease;
 }
@@ -104,8 +104,8 @@
 .info-modal-content {
   position: relative;
   width: min(100%, 760px);
-  max-height: 100%;
-  border-radius: 20px;
+  height: 100dvh;
+  max-height: 100dvh;
   border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.65);
@@ -121,7 +121,7 @@
 
 .info-modal-layout {
   width: 100%;
-  max-height: min(82vh, 760px);
+  max-height: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   overflow-y: auto;
@@ -244,9 +244,6 @@
   color: #e4e4e7;
 }
 
-.terminology-card-origin span {
-  color: #d4d4d8;
-}
 
 .info-modal-media {
   position: relative;
