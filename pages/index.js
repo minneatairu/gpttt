@@ -135,6 +135,25 @@ export default function Home() {
       function build3DText(font) {
         loadingEl.style.display = "none";
 
+        const italicSkewMatrix = new THREE.Matrix4().set(
+          1,
+          0.22,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        );
+
         const textOptions = {
           font,
           size: 70,
@@ -164,6 +183,7 @@ export default function Home() {
         });
 
         const geo1 = new TextGeometry("Okada", textOptions);
+        geo1.applyMatrix4(italicSkewMatrix);
         geo1.computeBoundingBox();
         const w1 = geo1.boundingBox.max.x - geo1.boundingBox.min.x;
         geo1.translate(
@@ -176,6 +196,7 @@ export default function Home() {
         word1.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo1), lineMat));
 
         const geo2 = new TextGeometry("Air", textOptions);
+        geo2.applyMatrix4(italicSkewMatrix);
         geo2.computeBoundingBox();
         const w2 = geo2.boundingBox.max.x - geo2.boundingBox.min.x;
         geo2.translate(
