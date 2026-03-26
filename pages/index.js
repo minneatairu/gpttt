@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 
 export default function Home() {
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   useEffect(() => {
     let scene;
     let camera;
@@ -414,6 +415,41 @@ export default function Home() {
       <main className="home-page">
         <div id="loading">Loading 3D Engine...</div>
         <div id="canvas-container" />
+
+        <button
+          type="button"
+          className="info-button"
+          aria-label="Open info image"
+          onClick={() => setIsInfoModalOpen(true)}
+        >
+          i
+        </button>
+
+        {isInfoModalOpen ? (
+          <div
+            className="info-modal-overlay"
+            role="button"
+            tabIndex={0}
+            onClick={() => setIsInfoModalOpen(false)}
+            onKeyDown={(event) => {
+              if (event.key === "Escape" || event.key === "Enter" || event.key === " ") {
+                setIsInfoModalOpen(false);
+              }
+            }}
+          >
+            <div className="info-modal-content" onClick={(event) => event.stopPropagation()}>
+              <button
+                type="button"
+                className="info-modal-close"
+                aria-label="Close image modal"
+                onClick={() => setIsInfoModalOpen(false)}
+              >
+                ×
+              </button>
+              <img src="/okada.jpg" alt="Okada" className="info-modal-image" />
+            </div>
+          </div>
+        ) : null}
       </main>
     </>
   );
