@@ -15,55 +15,16 @@ export default function Home() {
     let word1;
     let word2;
     let introProgress = 0;
-    let targetProgress = 1;
-    let modalTransitionInterval;
+    const targetProgress = 1;
     let animationFrame;
     let isDisposed = false;
-    let isModalOpen = false;
 
     const loadingEl = document.getElementById("loading");
     const container = document.getElementById("canvas-container");
-    const modal = document.getElementById("infoModal");
-    const playPauseBtn = document.getElementById("playPauseBtn");
 
-    if (!container || !loadingEl || !modal) {
+    if (!container || !loadingEl) {
       return undefined;
     }
-
-    function togglePlayState() {
-      const isShowing = modal.classList.contains("active");
-      isModalOpen = !isShowing;
-
-      if (modalTransitionInterval) {
-        clearInterval(modalTransitionInterval);
-      }
-
-      if (!isShowing) {
-        targetProgress = 0;
-        playPauseBtn.innerText = "||";
-
-        modalTransitionInterval = setInterval(() => {
-          if (introProgress <= 0) {
-            clearInterval(modalTransitionInterval);
-            modal.style.display = "flex";
-            void modal.offsetWidth;
-            modal.classList.add("active");
-          }
-        }, 50);
-      } else {
-        modal.classList.remove("active");
-        playPauseBtn.innerText = "▶";
-
-        setTimeout(() => {
-          if (!modal.classList.contains("active")) {
-            modal.style.display = "none";
-            targetProgress = 1;
-          }
-        }, 400);
-      }
-    }
-
-    playPauseBtn?.addEventListener("click", togglePlayState);
 
     const bootstrap = async () => {
       const THREE = await import("three");
@@ -369,7 +330,7 @@ export default function Home() {
             }
 
             group.rotation.y = Math.sin(Date.now() * 0.0005) * 0.6;
-          } else if (introProgress === 1) {
+          } else {
             word1.scale.set(1, 1, 1);
             word1.position.set(word1.userData.targetX, 0, 0);
             word1.rotation.set(0, 0, 0);
@@ -378,22 +339,17 @@ export default function Home() {
             word2.position.set(word2.userData.targetX, 0, 0);
             word2.rotation.set(0, 0, 0);
             group.rotation.y = Math.sin(Date.now() * 0.0005) * 0.6;
-          } else {
-            word1.scale.set(0, 0, 0);
-            word2.scale.set(0, 0, 0);
-            group.rotation.y = Math.sin(Date.now() * 0.0005) * 0.6;
           }
         }
 
         if (streakLight1 && streakLight2 && streakMesh1 && streakMesh2) {
-          const streaksVisible = !isModalOpen;
-          streakMesh1.visible = streaksVisible;
-          streakMesh2.visible = streaksVisible;
+          streakMesh1.visible = introProgress > 0;
+          streakMesh2.visible = introProgress > 0;
 
-          streakLight1.intensity = streaksVisible ? 4 * introProgress : 0;
-          streakLight2.intensity = streaksVisible ? 4 * introProgress : 0;
+          streakLight1.intensity = 4 * introProgress;
+          streakLight2.intensity = 4 * introProgress;
 
-          if (streaksVisible && introProgress > 0) {
+          if (introProgress > 0) {
             const time = Date.now() * 0.0012;
             streakLight1.position.set(Math.sin(time) * 380, 15, 35);
             streakLight2.position.set(Math.sin(time * 0.7 + Math.PI) * 380, -10, 40);
@@ -434,10 +390,6 @@ export default function Home() {
 
     return () => {
       isDisposed = true;
-      if (modalTransitionInterval) {
-        clearInterval(modalTransitionInterval);
-      }
-      playPauseBtn?.removeEventListener("click", togglePlayState);
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
@@ -461,27 +413,6 @@ export default function Home() {
 
       <main className="home-page">
         <div id="loading">Loading 3D Engine...</div>
-
-        {/*
-        <div className="y2k-btn-container">
-          <button id="playPauseBtn" className="y2k-btn" type="button">
-            ▶
-          </button>
-        </div>
-        */}
-
-        <div className="info-modal" id="infoModal">
-          <div className="modal-content">
-            <div className="modal-body">
-              <p className="route-intro" style={{ marginBottom: 0 }}>
-                A transit system for the reconstructed Walls of Benin.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="credits-text">Conceptualized by Minne Atairu</div>
-
         <div id="canvas-container" />
       </main>
     </>
