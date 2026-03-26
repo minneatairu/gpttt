@@ -90,9 +90,9 @@
   z-index: 10;
   background: rgba(0, 0, 0, 0.95);
   display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 32px);
   opacity: 0;
   transition: opacity 320ms ease;
 }
@@ -103,8 +103,12 @@
 
 .info-modal-content {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: min(100%, 760px);
+  max-height: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.65);
   opacity: 0;
   transform: translateY(12px) scale(0.985);
   transition: opacity 320ms ease, transform 320ms ease;
@@ -117,9 +121,10 @@
 
 .info-modal-layout {
   width: 100%;
-  height: 100%;
+  max-height: min(82vh, 760px);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  overflow-y: auto;
 }
 
 .info-modal-copy,
@@ -139,10 +144,9 @@
   width: min(100%, 560px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: rgba(10, 10, 10, 0.9);
+  background: transparent;
   color: #d4d4d8;
   padding: clamp(20px, 3vw, 38px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   font-family: "MuseoModerno", sans-serif;
 }
 
@@ -156,7 +160,7 @@
 .terminology-card-header h2 {
   margin: 0;
   color: #fafafa;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: 30px;
   line-height: 1.1;
 }
 
@@ -249,8 +253,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
+  min-height: 260px;
 }
 
 .info-modal-image {
@@ -285,12 +291,7 @@
 
 
 @media (max-width: 900px) {
-  .info-modal-layout {
-    grid-template-columns: 1fr;
-  }
-
   .info-modal-media {
-    border-left: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 220px;
   }
 }
