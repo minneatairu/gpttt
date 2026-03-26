@@ -163,7 +163,10 @@ export default function Home() {
           blending: THREE.AdditiveBlending,
         });
 
+        const italicShear = new THREE.Matrix4().makeShear(0.24, 0, 0, 0, 0, 0);
+
         const geo1 = new TextGeometry("Okada", textOptions);
+        geo1.applyMatrix4(italicShear);
         geo1.computeBoundingBox();
         const w1 = geo1.boundingBox.max.x - geo1.boundingBox.min.x;
         geo1.translate(
@@ -176,6 +179,7 @@ export default function Home() {
         word1.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo1), lineMat));
 
         const geo2 = new TextGeometry("Air", textOptions);
+        geo2.applyMatrix4(italicShear);
         geo2.computeBoundingBox();
         const w2 = geo2.boundingBox.max.x - geo2.boundingBox.min.x;
         geo2.translate(
