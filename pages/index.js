@@ -532,7 +532,7 @@ export default function Home() {
                     <section className="terminology-card-origin">
                       <h3>Word Origin</h3>
                       <p>
-                        <strong>Late 20th century:</strong> Named after <span>Okada Air</span>, a
+                        <strong>Late 20th century:</strong> Named after Okada Air, a
                         now-defunct Nigerian domestic airline founded in the 1980s. Because these
                         motorcycle taxis could bypass Lagos traffic jams and get passengers to their
                         destinations with airplane-like speed, locals began humorously comparing them to
