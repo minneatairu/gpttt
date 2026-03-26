@@ -446,7 +446,16 @@ export default function Home() {
               >
                 ×
               </button>
-              <img src="/okada.jpg" alt="Okada" className="info-modal-image" />
+
+              <div className="info-modal-layout">
+                <section className="info-modal-copy">
+                  <p>Okada Air</p>
+                </section>
+
+                <section className="info-modal-media">
+                  <img src="/okada.jpg" alt="Okada" className="info-modal-image" />
+                </section>
+              </div>
             </div>
           </div>
         ) : null}
