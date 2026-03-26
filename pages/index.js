@@ -456,6 +456,14 @@ export default function Home() {
       </Head>
 
       <main className="home-page">
+        <a
+          className="project-credit"
+          href="https://minneatairu.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          A project by Minne Atairu (2026)
+        </a>
         <div id="loading">Loading 3D Engine...</div>
         <div id="canvas-container" />
 
