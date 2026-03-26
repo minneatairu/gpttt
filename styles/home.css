@@ -127,7 +127,7 @@
 .info-modal-close {
   position: absolute;
   top: 8px;
-  right: 8px;
+  left: 8px;
   border: none;
   background: rgba(0, 0, 0, 0.55);
   color: white;
