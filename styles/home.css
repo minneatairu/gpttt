@@ -229,8 +229,8 @@
 .terminology-card-definition {
   margin: 0;
   color: #d4d4d8;
-  line-height: 1.7;
-  font-size: 0.97rem;
+  line-height: 1.2;
+  font-size: 30px;
 }
 
 .terminology-card-quote {
@@ -275,11 +275,18 @@
   color: #71717a;
 }
 
+.terminology-card-origin h2 {
+  margin: 0 0 10px;
+  text-align: left;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
 .terminology-card-origin p {
   margin: 0;
   color: #a1a1aa;
-  line-height: 1.7;
-  font-size: 0.9rem;
+  line-height: 1.2;
+  font-size: 30px;
 }
 
 .terminology-card-origin strong {
