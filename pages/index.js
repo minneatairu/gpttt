@@ -531,14 +531,8 @@ export default function Home() {
                       <span>[oh-kah-dah]</span>
                     </header>
 
-                    <div className="terminology-card-tags">
-                      <span>noun</span>
-                      <span>Nigerian English</span>
-                    </div>
+            
 
-                    <p className="terminology-card-plural">
-                      Plural: <strong>Okada</strong>
-                    </p>
 
                     <p className="terminology-card-definition">
                       A commercial motorcycle taxi used to transport passengers, particularly favored for
@@ -546,12 +540,7 @@ export default function Home() {
                       cars.
                     </p>
 
-                    <p className="terminology-card-usage-label">USAGE</p>
-
-                    <blockquote className="terminology-card-quote">
-                      "I dey on top <span>Okada</span>." <span className="terminology-card-usage-note">(I&apos;m riding a motorcycle)</span>
-                    </blockquote>
-
+                
                     <section className="terminology-card-origin">
                       <h3>Word Origin</h3>
                       <p>
