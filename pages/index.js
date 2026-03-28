@@ -532,7 +532,6 @@ export default function Home() {
                     </header>
 
                     <div className="terminology-card-tags">
-                      <span>noun</span>
                       <span>Nigerian English</span>
                     </div>
 
