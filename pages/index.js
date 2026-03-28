@@ -528,7 +528,7 @@ export default function Home() {
                   <article className="terminology-card" aria-label="Okada terminology info">
                     <header className="terminology-card-header">
                       <h2>Okada</h2>
-                      <span>[oh-kah-dah]</span>
+            
                     </header>
 
             
