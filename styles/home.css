@@ -121,7 +121,8 @@
   width: min(100%, 760px);
   max-height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: rgba(0, 0, 0, 0.65);
   opacity: 0;
   transform: translateY(42px) scale(0.99);
@@ -281,7 +282,7 @@
   border-left: none;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 4;
   min-height: 0;
   background: #020612;
 }
@@ -329,6 +330,6 @@
 
 @media (max-width: 900px) {
   .info-modal-media {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 4;
   }
 }
