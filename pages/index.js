@@ -542,7 +542,7 @@ export default function Home() {
 
                 
                     <section className="terminology-card-origin">
-                      <h3>Word Origin</h3>
+                      <h2>Word Origin</h2>
                       <p>
                         <strong>Late 20th century:</strong> Named after Okada Air, a
                         now-defunct Nigerian domestic airline founded in the 1980s. Because these
