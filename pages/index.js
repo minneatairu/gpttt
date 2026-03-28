@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import { Volume2 } from "lucide-react";
 
 const INFO_SLIDES = ["/okada.jpg", "/okada2.jpeg"];
 
@@ -527,7 +528,9 @@ export default function Home() {
                 <section className="info-modal-copy">
                   <article className="terminology-card" aria-label="Okada terminology info">
                     <header className="terminology-card-header">
-                      <h2>Okada</h2>
+                      <h2>
+                        Okada <Volume2 aria-hidden="true" className="terminology-volume-icon" />
+                      </h2>
             
                     </header>
 
